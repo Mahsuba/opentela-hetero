@@ -1,0 +1,25 @@
+Day 1 — OpenTela-Hetero
+
+Today I learned:
+- A program is a set of instructions for a computer.
+- The terminal lets me give commands to the computer.
+- A file stores information.
+- A folder organizes files.
+- Go source files use the .go extension.
+- I can run a Go program with: go run hello.go
+
+Today I built:
+- My first Go program: hello.go
+- Project folder: opentela-hetero/day01
+
+What confused me:
+- Nothing major. I am still learning what each Go line means.
+
+How I fixed it:
+- I followed the steps, ran the program, changed the text, and ran it again.
+
+One-sentence explanation:
+- I created and successfully ran my first Go program.
+
+Git commit:
+- Not yet; Git is part of a later Day 1/Week 1 step.
