@@ -12,7 +12,7 @@ func main() {
     node := Node{
         Name: "computer-1",
         City: "Dhaka",
-        CPU:  "AMD",
+        CPU:  "Intel",
     }
 
     fmt.Println(node.Name)
