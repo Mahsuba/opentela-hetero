@@ -1,0 +1,20 @@
+[
+  {
+    "name": "computer-1",
+    "location": "Dhaka",
+    "gpu": "RTX 5060",
+    "vram_gb": 8
+  },
+  {
+    "name": "computer-2",
+    "location": "London",
+    "gpu": "RTX 5070",
+    "vram_gb": 12
+  },
+  {
+    "name": "computer-3",
+    "location": "Zurich",
+    "gpu": "RTX 5090",
+    "vram_gb": 32
+  }
+]
