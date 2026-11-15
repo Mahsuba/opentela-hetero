@@ -15,7 +15,7 @@ Before introducing hardware capability-aware placement, we need to understand an
 - Go version: Go 1.27.1
 - Repository: OpenTela
 - Build branch: main
-- Build commit: fc9875d
+- Build commit: 4b6e90f (clean upstream eth-easl/opentela main)
 
 ## 3. Build Procedure
 
@@ -76,8 +76,7 @@ The following command was executed:
 Output:
 
 ```text
-OpenTela version main (commit: fc9875d)
-(built at: 2026-11-13T14:45:25-0800)
+OpenTela version main (commit: 4b6e90f) (built at: 2026-11-15T12:07:08-0800)
 ```
 
 This confirms the version and commit information embedded in the generated binary.
@@ -116,3 +115,9 @@ Therefore, we have established a working baseline for subsequent OpenTela-Hetero
 
 Future experiments can build on this baseline to investigate hardware capability discovery, metadata propagation, and compatibility-aware placement.
 
+
+## 10. Correction (2026-11-15)
+The first build (2026-11-13) was from commit fc9875d, which was upstream + one extra commit adding my glossary to the OpenTela repo.
+That broke the "don't modify the original repo" rule, so I moved the glossary to opentela-hetero (week4/day01), reset my fork's main to upstream/main (4b6e90f), and rebuilt.
+Rebuild: `make build-release` in opentela/src -> otela-amd64 + otela-arm64, version shows commit 4b6e90f, `git status --short` is clean.
+This is now the true baseline.
