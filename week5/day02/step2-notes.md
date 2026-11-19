@@ -38,4 +38,4 @@ nvidia-smi --query-gpu=name,memory.total,memory.used,compute_cap,driver_version 
 - So compute capability is "available from nvidia-smi but not collected", same pattern as GOARCH in W5D1.
 
 ## Limits
-- One machine, one GPU. No AMD hardware, so no AMD fixture (not made up on purpose).
+- One machine, one GPU. CPU is AMD (Ryzen 7 7700), but no AMD graphics card, so no rocm-smi fixture (not made up on purpose).
