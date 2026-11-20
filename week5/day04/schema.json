@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "opentela-hetero/capability-profile/v1",
+  "title": "OpenTela-Hetero capability profile, version 1",
+  "description": "What one computer reports about its hardware. Every field has a reason (see week5/day04/schema-notes.md).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "collected_at", "source", "cpu", "gpu_status", "gpus"],
+  "properties": {
+    "schema_version": {
+      "description": "Shape version, so readers know which rules apply if the shape changes later.",
+      "const": "1"
+    },
+    "collected_at": {
+      "description": "H3: when this was measured, in UTC, so readers can tell how old it is.",
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    },
+    "source": {
+      "description": "Honesty: where the numbers came from.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "tool"],
+      "properties": {
+        "mode": {
+          "description": "live = read from the real machine now; fixture = read from a saved capture file.",
+          "enum": ["live", "fixture"]
+        },
+        "tool": {
+          "description": "Which program gave the GPU numbers.",
+          "enum": ["nvidia-smi", "rocm-smi", "none"]
+        },
+        "fixture_file": {
+          "description": "Which saved file was used (only for fixture mode).",
+          "type": "string"
+        }
+      }
+    },
+    "cpu": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["arch"],
+      "properties": {
+        "arch": {
+          "description": "H1: a program built for one architecture fails on another (Exec format error). Go names only: amd64 not x86_64, arm64 not aarch64.",
+          "enum": ["amd64", "arm64", "riscv64", "386", "arm", "ppc64le", "s390x"]
+        }
+      }
+    },
+    "gpu_status": {
+      "description": "Why the GPU list looks the way it does. ok = tool ran and found GPUs; none_found = tool ran and found zero; tool_missing = tool not installed, so we cannot be sure; query_failed = tool exists but gave an error.",
+      "enum": ["ok", "none_found", "tool_missing", "query_failed"]
+    },
+    "gpu_error": {
+      "description": "The error text when gpu_status is tool_missing or query_failed, so a person can see why.",
+      "type": "string"
+    },
+    "gpus": {
+      "description": "One entry per GPU card. Empty when gpu_status is not ok.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/gpu" }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "gpu_status": { "const": "ok" } } },
+      "then": { "properties": { "gpus": { "minItems": 1 } } },
+      "else": { "properties": { "gpus": { "maxItems": 0 } } }
+    }
+  ],
+  "$defs": {
+    "gpu": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["vendor", "name", "memory_total_mib", "memory_used_mib", "compute_capability", "driver_version", "uuid_short", "pci_bus_id"],
+      "properties": {
+        "vendor": {
+          "description": "H1: CUDA jobs need NVIDIA. OpenTela also tries AMD (rocm-smi, gpu.go:49).",
+          "enum": ["nvidia", "amd"]
+        },
+        "name": {
+          "description": "OpenTela already has this field (GPUSpec.Name). Readable in the report.",
+          "type": "string",
+          "minLength": 1
+        },
+        "memory_total_mib": {
+          "description": "H2: free memory = total - used. Whole number, MiB.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "memory_used_mib": {
+          "description": "H2: busy or not. Changes all the time, so it can get old (H3). Whole number, MiB.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "compute_capability": {
+          "description": "H1: a job may need a minimum GPU generation. Text like 12.0, not a number. null = not available.",
+          "type": ["string", "null"],
+          "pattern": "^[0-9]+\\.[0-9]+$"
+        },
+        "driver_version": {
+          "description": "H1 candidate: an old driver may not run new CUDA jobs. RQ4 may show it is not needed. null = not available.",
+          "type": ["string", "null"],
+          "minLength": 1
+        },
+        "uuid_short": {
+          "description": "Day 3: which physical card. Only GPU- plus 8 characters, never the full uuid. null = not available.",
+          "type": ["string", "null"],
+          "pattern": "^GPU-[0-9a-f]{8}$"
+        },
+        "pci_bus_id": {
+          "description": "Day 3: which slot. Backup ID when there is no uuid. null = not available.",
+          "type": ["string", "null"],
+          "pattern": "^[0-9A-Fa-f]{8}:[0-9A-Fa-f]{2}:[0-9A-Fa-f]{2}\\.[0-7]$"
+        }
+      }
+    }
+  }
+}
