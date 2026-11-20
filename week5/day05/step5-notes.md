@@ -39,3 +39,6 @@ Two bugs were found in testing and fixed before committing: uuid_short was alway
 
 ## Why it matters
 A scheduler that knows "no GPU" vs "GPU tool broken" can send CPU jobs to the first and treat the second as unknown (RQ1). A frozen nvidia-smi without a time limit could delay a node (RQ2). This is a measured difference, not a claim that OpenTela is wrong.
+
+## Extra: real 2-GPU fixture (Kaggle)
+I captured 2x Tesla T4 on Kaggle (compute capability 7.5, driver 580.178.04) into fixtures/kaggle-t4x2.csv. The profiler read it in fixture mode: ok with 2 GPUs, schema PASS. This is the first real multi-GPU test. See fixtures/README.md for the fixture time/CPU limit.

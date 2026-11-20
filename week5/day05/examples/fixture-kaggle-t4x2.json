@@ -1,0 +1,35 @@
+{
+  "schema_version": "1",
+  "collected_at": "2026-11-20T20:39:18Z",
+  "source": {
+    "mode": "fixture",
+    "tool": "nvidia-smi",
+    "fixture_file": "week5/day05/fixtures/kaggle-t4x2.csv"
+  },
+  "cpu": {
+    "arch": "amd64"
+  },
+  "gpu_status": "ok",
+  "gpus": [
+    {
+      "vendor": "nvidia",
+      "name": "Tesla T4",
+      "memory_total_mib": 15360,
+      "memory_used_mib": 0,
+      "compute_capability": "7.5",
+      "driver_version": "580.178.04",
+      "uuid_short": "GPU-b6f3fe4c",
+      "pci_bus_id": "00000000:00:04.0"
+    },
+    {
+      "vendor": "nvidia",
+      "name": "Tesla T4",
+      "memory_total_mib": 15360,
+      "memory_used_mib": 0,
+      "compute_capability": "7.5",
+      "driver_version": "580.178.04",
+      "uuid_short": "GPU-57dc86ae",
+      "pci_bus_id": "00000000:00:05.0"
+    }
+  ]
+}
