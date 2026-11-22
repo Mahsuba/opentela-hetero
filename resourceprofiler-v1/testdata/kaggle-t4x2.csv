@@ -1,0 +1,5 @@
+# collected_at=2026-11-20T20:37:34Z
+# arch=x86_64
+# note=Kaggle notebook, accelerator "GPU T4 x2" (uuids cut to 8 hex before saving)
+Tesla T4, 15360, 0, 7.5, 580.178.04, GPU-b6f3fe4c, 00000000:00:04.0
+Tesla T4, 15360, 0, 7.5, 580.178.04, GPU-57dc86ae, 00000000:00:05.0
