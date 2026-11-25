@@ -1,0 +1,6 @@
+# job	arch	min_cc	min_free_mib	(- = no need)
+any	-	-	-
+cc8	-	8.0	-
+free10g	-	-	10000
+cc8_free10g	-	8.0	10000
+arm64	arm64	-	-
