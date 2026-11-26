@@ -1,0 +1,10 @@
+job           rtx   t4  503  other
+any             6    4    0      0
+cc8            10    0    0      0
+free10g         0   10    0      0
+cc8_free10g     0    0   10      0
+arm64           0    0   10      0
+wrong placements (sent to a worker whose hardware does not fit): 0 of 40 jobs with needs
+fitting jobs refused (503 although a worker fits): 0
+other replies (not 200 or 503, or unknown node): 0
+two-witness mismatches (node header vs runner reply): 0
