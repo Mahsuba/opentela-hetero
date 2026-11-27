@@ -1,0 +1,27 @@
+{
+  "name": "OpenTela-Hetero Week 7 workloads",
+  "version": 1,
+  "note": "Fixed job lists. Same jobs, same order, same counts in every run and every mode. null = no need. Needs are sent as X-Otela-Need-Arch, X-Otela-Need-Min-CC, X-Otela-Need-Min-Free-MiB.",
+  "h1": {
+    "tries_per_job": 10,
+    "order": "each job in the list order, tried tries_per_job times, one at a time",
+    "jobs": [
+      {"name": "any", "kind": "control", "arch": null, "min_cc": null, "min_free_mib": null},
+      {"name": "cpu_amd64", "kind": "CPU-only", "arch": "amd64", "min_cc": null, "min_free_mib": null},
+      {"name": "cpu_arm64", "kind": "CPU-only", "arch": "arm64", "min_cc": null, "min_free_mib": null},
+      {"name": "gpu_any", "kind": "GPU-required", "arch": null, "min_cc": null, "min_free_mib": 1},
+      {"name": "cc8", "kind": "capability-specific", "arch": null, "min_cc": "8.0", "min_free_mib": null},
+      {"name": "free10g", "kind": "capability-specific", "arch": null, "min_cc": null, "min_free_mib": 10000},
+      {"name": "cc8_free10g", "kind": "capability-specific", "arch": null, "min_cc": "8.0", "min_free_mib": 10000},
+      {"name": "cc13", "kind": "unsupported", "arch": null, "min_cc": "13.0", "min_free_mib": null},
+      {"name": "arm64_gpu", "kind": "unsupported", "arch": "arm64", "min_cc": null, "min_free_mib": 1}
+    ]
+  },
+  "h2": {
+    "job": {"name": "hold3g", "arch": null, "min_cc": null, "min_free_mib": 3000, "hold_mib": 3000, "hold_s": 2},
+    "jobs_per_round": 8,
+    "rounds": 10,
+    "order": "send jobs_per_round jobs at the same time, wait until all answer, then the next round",
+    "t4_taken_mib_per_gpu": {"true": 0, "stale": 12000}
+  }
+}
